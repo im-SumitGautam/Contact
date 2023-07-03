@@ -15,26 +15,26 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 public class ContactDetails extends AppCompatActivity {
 
-    TextView  mobileNumber, companyTxt;
+    TextView mobileNumber, companyTxt;
     LinearLayout companyView;
-
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_details);
 
-//        getSupportActionBar().hide();
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         collapsingToolbarLayout = findViewById(R.id.collapsingToolbar);
-
-
+        toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_24);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
 
 
@@ -48,6 +48,10 @@ public class ContactDetails extends AppCompatActivity {
         String company = getIntent().getStringExtra(CreateNewContact.Company);
         String phoneNumber = getIntent().getStringExtra(CreateNewContact.PhoneNumber);
 
+        //FirstName and LastName
+        if(lastName == null){
+            lastName = "";
+        }
         collapsingToolbarLayout.setTitle(firstName + " " + lastName);
         mobileNumber.setText(phoneNumber);
 
@@ -59,5 +63,11 @@ public class ContactDetails extends AppCompatActivity {
             companyView.setVisibility(View.VISIBLE);
             companyTxt.setText(company);
         }
+    }
+    @Override
+    public void onBackPressed() {
+        //Execute your code here
+        finish();
+
     }
 }

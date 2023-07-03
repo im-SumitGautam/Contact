@@ -14,7 +14,9 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.contact.databinding.ActivityCreateNewContactBinding;
@@ -29,9 +31,6 @@ public class CreateNewContact extends AppCompatActivity {
     CreateNewActivityClickHandler handler;
     ActivityCreateNewContactBinding createNewContactBinding;
     ContactViewModel contactViewModel;
-
-
-
 
     Contact contact;
 
@@ -63,8 +62,6 @@ public class CreateNewContact extends AppCompatActivity {
         createNewContactBinding.setCreateNewContactClickHandler(handler);
 
         createNewContactBinding.setContactEditText(contact);
-
-
 
 
     }

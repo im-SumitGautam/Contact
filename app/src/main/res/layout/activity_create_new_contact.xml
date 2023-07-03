@@ -75,6 +75,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:hint="First Name"
+                    android:inputType="textPersonName"
                     android:padding="12dp"
                     android:text="@={contactEditText.firstName}"
                     android:textColor="@color/black" />
@@ -85,6 +86,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:hint="Last Name"
+                    android:inputType="textPersonName"
                     android:padding="12dp"
                     android:text="@={contactEditText.lastName}"
                     android:textColor="@color/black" />
@@ -95,6 +97,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:hint="Comapny"
+                    android:inputType="textPersonName"
                     android:padding="12dp"
                     android:text="@={contactEditText.company}"
                     android:textColor="@color/black" />
@@ -105,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:background="@color/white"
-                    android:hint="Comapny"
+                    android:hint="Phone Number"
                     android:inputType="phone"
                     android:padding="12dp"
                     android:text="@={contactEditText.phoneNumber}"
