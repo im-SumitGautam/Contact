@@ -3,32 +3,21 @@ package com.example.contact;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Toast;
-
-
 import com.example.contact.databinding.ActivityMainBinding;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -43,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
     ContactRecyclerAdapter contactRecyclerAdapter;
     ActivityMainBinding activityMainBinding;
     MainActivityClickEvent handler;
-
-    private Contact selectedContact;
     public long selectedContactId;
+
+    androidx.appcompat.widget.SearchView searchView;
 
 
     @Override
@@ -53,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.mainActivityToolbar);
         setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Contact");
-        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+//        Objects.requireNonNull(getSupportActionBar()).setTitle("Contact");
+//        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         handler = new MainActivity.MainActivityClickEvent();
@@ -66,6 +55,25 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.hasFixedSize();
+
+
+        searchView = findViewById(R.id.searchView);
+        searchView.clearFocus();
+
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                contactRecyclerAdapter.getFilter().filter(newText);
+
+                return false;
+            }
+        });
 
 
         //Adapter
@@ -87,8 +95,6 @@ public class MainActivity extends AppCompatActivity {
                 contactViewModel.deleteContact(contact);
             }
         }).attachToRecyclerView(recyclerView);
-
-
 
 
         contactViewModel.getGetContact().observe(this, new Observer<List<Contact>>() {
@@ -116,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
     public void LoadCoursesArrayList(long contactID) {
         contactViewModel.getContactByID(contactID).observe(this, new Observer<List<Contact>>() {
@@ -203,9 +208,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
-
-
     }
-
 
 }

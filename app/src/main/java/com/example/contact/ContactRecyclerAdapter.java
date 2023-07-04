@@ -7,7 +7,10 @@ import android.view.LayoutInflater;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 
 import androidx.annotation.NonNull;
@@ -20,10 +23,14 @@ import com.example.contact.databinding.RecyclerListBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactRecyclerAdapter extends RecyclerView.Adapter<ContactRecyclerAdapter.ContactViewHolder> {
+public class ContactRecyclerAdapter extends RecyclerView.Adapter<ContactRecyclerAdapter.ContactViewHolder> implements Filterable {
 
     ArrayList<Contact> contactArrayList = new ArrayList<>();
     private OnItemClickListener listener;
+
+    ArrayList<Contact> backup;
+
+
 
     @NonNull
     @Override
@@ -32,7 +39,9 @@ public class ContactRecyclerAdapter extends RecyclerView.Adapter<ContactRecycler
                 R.layout.recycler_list, parent, false);
         return new ContactViewHolder(recyclerListBinding);
 
+
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
@@ -42,13 +51,14 @@ public class ContactRecyclerAdapter extends RecyclerView.Adapter<ContactRecycler
 
     @Override
     public int getItemCount() {
-        return null!=contactArrayList?contactArrayList.size():0;
+        return null != contactArrayList ? contactArrayList.size() : 0;
     }
 
     public void setContact(ArrayList<Contact> contacts) {
         this.contactArrayList = contacts;
         notifyDataSetChanged();
     }
+
 
     class ContactViewHolder extends RecyclerView.ViewHolder {
 
@@ -70,15 +80,57 @@ public class ContactRecyclerAdapter extends RecyclerView.Adapter<ContactRecycler
         }
 
     }
-    public void setListener(OnItemClickListener listener){
+
+    public void setListener(OnItemClickListener listener) {
         this.listener = listener;
     }
-    public interface OnItemClickListener{
+
+    public interface OnItemClickListener {
         void onItemClick(Contact contact);
 
     }
 
 
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            backup =new ArrayList<>(contactArrayList);
+
+            ArrayList<Contact> filterData = new ArrayList<>();
+
+            if (charSequence.toString().isEmpty()) {
+                filterData.addAll(backup);
+                Log.d("emp","empty");
+
+            } else {
+                for (Contact contact : backup) {
+                    if (contact.getFirstName().toLowerCase().toString().contains(charSequence.toString().toLowerCase())) {
+                        filterData.add(contact);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filterData;
+            return results;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+
+
+            contactArrayList.clear();
+            contactArrayList.addAll((ArrayList<Contact>) filterResults.values);
+            notifyDataSetChanged();
+
+        }
+    };
 
 
 }
