@@ -38,7 +38,6 @@ public class Contact {
         this.lastName = lastName;
         this.company = company;
         this.phoneNumber = phoneNumber;
-        this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
         this.note = note;
