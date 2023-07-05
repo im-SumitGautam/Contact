@@ -1,9 +1,7 @@
 package com.example.contact;
 
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,9 +12,6 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.contact.databinding.ActivityCreateNewContactBinding;
@@ -34,7 +29,6 @@ public class CreateNewContact extends AppCompatActivity {
     CreateNewActivityClickHandler handler;
     ActivityCreateNewContactBinding createNewContactBinding;
     ContactViewModel contactViewModel;
-
     Contact contact;
 
     @Override
@@ -48,7 +42,7 @@ public class CreateNewContact extends AppCompatActivity {
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
 
-        getWindow().setLayout((width), (int) (height * .95));
+        getWindow().setLayout((width), (int) (height * .90));
 
         WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
         layoutParams.gravity = Gravity.BOTTOM;
@@ -65,13 +59,11 @@ public class CreateNewContact extends AppCompatActivity {
         createNewContactBinding.setCreateNewContactClickHandler(handler);
 
         createNewContactBinding.setContactEditText(contact);
-
-
     }
 
     public class CreateNewActivityClickHandler {
-
         Context context;
+
         public CreateNewActivityClickHandler(Context context) {
             this.context = context;
         }
@@ -81,33 +73,24 @@ public class CreateNewContact extends AppCompatActivity {
         }
 
         public void onDoneTxtClick(View view) {
-
-
-
-            if(contact.getFirstName() == null){
+            //set the contact
+            if (contact.getFirstName() == null) {
                 Toast.makeText(CreateNewContact.this, "empty", Toast.LENGTH_SHORT).show();
-            }else {
-
+            } else {
                 contactViewModel.addNewContact(contact);
                 Intent i = new Intent();
-                i.putExtra(First_Name,contact.getFirstName());
-                i.putExtra(Last_Name,contact.getLastName());
-                i.putExtra(Company,contact.getCompany());
-                i.putExtra(PhoneNumber,contact.getPhoneNumber());
-                i.putExtra(Email,contact.getEmail());
-                i.putExtra(Address,contact.getAddress());
-                i.putExtra(Notes,contact.getNote());
+                i.putExtra(First_Name, contact.getFirstName());
+                i.putExtra(Last_Name, contact.getLastName());
+                i.putExtra(Company, contact.getCompany());
+                i.putExtra(PhoneNumber, contact.getPhoneNumber());
+                i.putExtra(Email, contact.getEmail());
+                i.putExtra(Address, contact.getAddress());
+                i.putExtra(Notes, contact.getNote());
 
-                setResult(RESULT_OK,i);
+                setResult(RESULT_OK, i);
                 finish();
-
-//                createView
-
             }
-
             Toast.makeText(CreateNewContact.this, "Done Click", Toast.LENGTH_SHORT).show();
         }
     }
-
-
 }

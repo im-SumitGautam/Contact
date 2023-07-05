@@ -22,7 +22,6 @@ public abstract class ContactDatabase extends RoomDatabase {
                     .addCallback(roomCallBack)
                     .build();
         }
-
         return instance;
     }
 

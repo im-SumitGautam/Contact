@@ -14,9 +14,7 @@ public class ContactViewModel extends AndroidViewModel {
 
     private final ContactRepo contactRepo;
     private LiveData<List<Contact>> getContact;
-
     private LiveData<List<Contact>> getContactByID;
-
 
     public ContactViewModel(@NonNull Application application) {
         super(application);
@@ -28,9 +26,9 @@ public class ContactViewModel extends AndroidViewModel {
         return getContact;
     }
 
-    public LiveData<List<Contact>> getContactByID(long contactID){
+    public LiveData<List<Contact>> getContactByID(long contactID) {
         getContactByID = contactRepo.getContactByID(contactID);
-        return  getContactByID(contactID);
+        return getContactByID(contactID);
     }
 
     public void addNewContact(Contact contact) {
@@ -44,8 +42,6 @@ public class ContactViewModel extends AndroidViewModel {
     public void updateContact(Contact contact) {
         contactRepo.updateContact(contact);
     }
-
-
 }
 
 //    Finally we will reference the viewmodel in our view (Activity or fragment) and call respective CRUD Functions

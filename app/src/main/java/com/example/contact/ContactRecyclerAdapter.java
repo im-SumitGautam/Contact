@@ -135,4 +135,8 @@ public class ContactRecyclerAdapter extends RecyclerView.Adapter<ContactRecycler
     };
 
 
+    public Contact getContactAtPosition (int position) {
+        return contactArrayList.get(position);
+    }
+
 }

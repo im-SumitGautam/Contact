@@ -1,4 +1,5 @@
 package com.example.contact;
+
 import android.app.Application;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,8 +20,8 @@ public class ContactRepo {
         allContact = contactDao.getAllContact();
 
     }
-    //Methods for Database operation
 
+    //Methods for Database operation
     public void insertContact(Contact contact) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Handler handler = new Handler();
@@ -30,8 +31,6 @@ public class ContactRepo {
                 contactDao.insertContact(contact);
             }
         });
-
-
     }
 
     public void updateContact(Contact contact) {
@@ -43,7 +42,6 @@ public class ContactRepo {
                 contactDao.updateContact(contact);
             }
         });
-
     }
 
     public void deleteContact(Contact contact) {
@@ -52,17 +50,12 @@ public class ContactRepo {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-
                 // Inserting Categories
                 contactDao.deleteContact(contact);
-
-
                 // Do after background execution is done - post execution
             }
         });
     }
-
-
 
     public LiveData<List<Contact>> getAllContact() {
         return allContact;

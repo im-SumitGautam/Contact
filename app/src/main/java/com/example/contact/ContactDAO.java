@@ -20,7 +20,6 @@ public interface ContactDAO {
     @Delete
     void deleteContact(Contact contact);
 
-
     @Query("select * from contact")
     LiveData<List<Contact>> getAllContact();
 

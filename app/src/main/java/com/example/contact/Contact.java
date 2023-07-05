@@ -19,7 +19,7 @@ public class Contact {
 
     @ColumnInfo(name = "company")
     private String company;
-//
+    //
     @ColumnInfo(name = "phoneNumber")
     private String phoneNumber;
 
@@ -32,7 +32,7 @@ public class Contact {
     @ColumnInfo(name = "note")
     private String note;
 
-    public Contact(long id, String firstName, String lastName, String company , String phoneNumber,String email,String address,String note) {
+    public Contact(long id, String firstName, String lastName, String company, String phoneNumber, String email, String address, String note) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -79,7 +79,6 @@ public class Contact {
 
     public void setCompany(String company) {
         this.company = company;
-
     }
 
     public String getPhoneNumber() {

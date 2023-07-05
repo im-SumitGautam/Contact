@@ -15,7 +15,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 public class ContactDetails extends AppCompatActivity {
 
-    TextView mobileNumber, companyTxt, emailTxt, addressTxt, notesTxt ;
+    TextView mobileNumber, companyTxt, emailTxt, addressTxt, notesTxt;
     LinearLayout companyView, emailView, addressView, notesView;
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
@@ -36,8 +36,6 @@ public class ContactDetails extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
-
 
         //cardView
         companyView = findViewById(R.id.cardViewCompany);
@@ -62,7 +60,7 @@ public class ContactDetails extends AppCompatActivity {
         String notes = getIntent().getStringExtra(CreateNewContact.Notes);
 
         //FirstName and LastName
-        if(lastName == null){
+        if (lastName == null) {
             lastName = "";
         }
         collapsingToolbarLayout.setTitle(firstName + " " + lastName);
@@ -100,6 +98,7 @@ public class ContactDetails extends AppCompatActivity {
             notesTxt.setText(notes);
         }
     }
+
     @Override
     public void onBackPressed() {
         //Execute your code here
