@@ -12,6 +12,8 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.example.contact.databinding.ActivityCreateNewContactBinding;
@@ -30,6 +32,8 @@ public class CreateNewContact extends AppCompatActivity {
     ActivityCreateNewContactBinding createNewContactBinding;
     ContactViewModel contactViewModel;
     Contact contact;
+
+    Animation btnClickAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,9 @@ public class CreateNewContact extends AppCompatActivity {
         createNewContactBinding.setCreateNewContactClickHandler(handler);
 
         createNewContactBinding.setContactEditText(contact);
+
+        btnClickAnimation = AnimationUtils.loadAnimation(this, R.anim.btn_click);
+
     }
 
     public class CreateNewActivityClickHandler {
@@ -73,8 +80,10 @@ public class CreateNewContact extends AppCompatActivity {
         }
 
         public void onDoneTxtClick(View view) {
+
             //set the contact
             if (contact.getFirstName() == null) {
+                btnClickAnimation.start();
                 Toast.makeText(CreateNewContact.this, "empty", Toast.LENGTH_SHORT).show();
             } else {
                 contactViewModel.addNewContact(contact);
@@ -90,6 +99,7 @@ public class CreateNewContact extends AppCompatActivity {
                 setResult(RESULT_OK, i);
                 finish();
             }
+            btnClickAnimation.start();
             Toast.makeText(CreateNewContact.this, "Done Click", Toast.LENGTH_SHORT).show();
         }
     }
