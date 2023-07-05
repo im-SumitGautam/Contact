@@ -58,6 +58,9 @@
                     android:textSize="20sp" />
 
             </RelativeLayout>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -115,8 +118,52 @@
                     android:text="@={contactEditText.phoneNumber}"
                     android:textColor="@color/black" />
 
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:padding="12dp"
+                    android:text="@={contactEditText.email}"
+                    android:textColor="@color/black" />
+
+
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    android:hint="Address"
+                    android:lines="4"
+                    android:inputType="textMultiLine"
+                    android:padding="12dp"
+                    android:text="@={contactEditText.address}"
+                    android:textColor="@color/black" />
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:background="@color/white"
+                    android:hint="Notes"
+                    android:lines="5"
+                    android:inputType="textMultiLine"
+                    android:padding="12dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="@={contactEditText.note}"
+                    android:textColor="@color/black" />
+
+
+
+
 
             </LinearLayout>
+            </ScrollView>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

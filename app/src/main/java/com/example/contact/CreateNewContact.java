@@ -28,6 +28,9 @@ public class CreateNewContact extends AppCompatActivity {
     public static final String Last_Name = "lastName";
     public static final String Company = "company";
     public static final String PhoneNumber = "phoneNumber";
+    public static final String Email = "email";
+    public static final String Address = "address";
+    public static final String Notes = "notes";
     CreateNewActivityClickHandler handler;
     ActivityCreateNewContactBinding createNewContactBinding;
     ContactViewModel contactViewModel;
@@ -91,6 +94,9 @@ public class CreateNewContact extends AppCompatActivity {
                 i.putExtra(Last_Name,contact.getLastName());
                 i.putExtra(Company,contact.getCompany());
                 i.putExtra(PhoneNumber,contact.getPhoneNumber());
+                i.putExtra(Email,contact.getEmail());
+                i.putExtra(Address,contact.getAddress());
+                i.putExtra(Notes,contact.getNote());
 
                 setResult(RESULT_OK,i);
                 finish();

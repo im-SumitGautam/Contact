@@ -15,11 +15,12 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 public class ContactDetails extends AppCompatActivity {
 
-    TextView mobileNumber, companyTxt;
-    LinearLayout companyView;
+    TextView mobileNumber, companyTxt, emailTxt, addressTxt, notesTxt ;
+    LinearLayout companyView, emailView, addressView, notesView;
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,15 +39,27 @@ public class ContactDetails extends AppCompatActivity {
 
 
 
+        //cardView
+        companyView = findViewById(R.id.cardViewCompany);
+        emailView = findViewById(R.id.cardViewEmail);
+        addressView = findViewById(R.id.cardViewAddress);
+        notesView = findViewById(R.id.cardViewNotes);
+
+        //TextViews
         mobileNumber = findViewById(R.id.number);
         companyTxt = findViewById(R.id.Company);
-        companyView = findViewById(R.id.cardViewCompany);
+        emailTxt = findViewById(R.id.email);
+        addressTxt = findViewById(R.id.address);
+        notesTxt = findViewById(R.id.notes);
 
         //Get Intent from Main Activity to display contact details in this activity
         String firstName = getIntent().getStringExtra(CreateNewContact.First_Name);
         String lastName = getIntent().getStringExtra(CreateNewContact.Last_Name);
         String company = getIntent().getStringExtra(CreateNewContact.Company);
         String phoneNumber = getIntent().getStringExtra(CreateNewContact.PhoneNumber);
+        String email = getIntent().getStringExtra(CreateNewContact.Email);
+        String address = getIntent().getStringExtra(CreateNewContact.Address);
+        String notes = getIntent().getStringExtra(CreateNewContact.Notes);
 
         //FirstName and LastName
         if(lastName == null){
@@ -63,10 +76,34 @@ public class ContactDetails extends AppCompatActivity {
             companyView.setVisibility(View.VISIBLE);
             companyTxt.setText(company);
         }
+
+        if (email == null) {
+            emailView.setVisibility(View.GONE);
+
+        } else {
+            emailView.setVisibility(View.VISIBLE);
+            emailTxt.setText(email);
+        }
+
+        if (address == null) {
+            addressView.setVisibility(View.GONE);
+
+        } else {
+            addressView.setVisibility(View.VISIBLE);
+            addressTxt.setText(address);
+        }
+        if (notes == null) {
+            notesView.setVisibility(View.GONE);
+
+        } else {
+            notesView.setVisibility(View.VISIBLE);
+            notesTxt.setText(notes);
+        }
     }
     @Override
     public void onBackPressed() {
         //Execute your code here
+        super.onBackPressed();
         finish();
 
     }

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
@@ -20,6 +22,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 
 import com.example.contact.databinding.ActivityMainBinding;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -71,24 +74,21 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
                 contactRecyclerAdapter.getFilter().filter(newText);
-
                 return false;
             }
         });
 
 
-
         //ViewModel Calling
         contactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
-
         // Handling Swiping
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
             }
+
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 Contact contact = contactArrayList.get(viewHolder.getAdapterPosition());
@@ -114,6 +114,9 @@ public class MainActivity extends AppCompatActivity {
                         i.putExtra(CreateNewContact.Last_Name, contact.getLastName());
                         i.putExtra(CreateNewContact.Company, contact.getCompany());
                         i.putExtra(CreateNewContact.PhoneNumber, contact.getPhoneNumber());
+                        i.putExtra(CreateNewContact.Email, contact.getEmail());
+                        i.putExtra(CreateNewContact.Address, contact.getAddress());
+                        i.putExtra(CreateNewContact.Notes, contact.getNote());
                         startActivity(i);
 
                     }
@@ -144,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 //        contactRecyclerAdapter.setContact(contactArrayList);
 
 
-        // EDIT THE COURSE
+    // EDIT THE COURSE
 //        contactRecyclerAdapter.setListener(new ContactRecyclerAdapter.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(Contact contact) {
@@ -160,29 +163,6 @@ public class MainActivity extends AppCompatActivity {
 //        });
 //    }
 
-//    private void addNewContact(Contact contact) {
-//        ExecutorService executor = Executors.newSingleThreadExecutor();
-//        Handler handler = new Handler(Looper.getMainLooper());
-//
-//        executor.execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                // OnBackground
-//                contactViewModel.addNewContact(contact);
-//                contactArrayList.add(contact);
-//
-//                // On Post Execution
-//                handler.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        contactRecyclerAdapter.notifyDataSetChanged();
-//                    }
-//                });
-//
-//            }
-//        });
-//
-//    }
 
     public class MainActivityClickEvent {
         public void onFabBtnClick(View view) {
@@ -202,8 +182,12 @@ public class MainActivity extends AppCompatActivity {
             String lastName = data.getStringExtra(CreateNewContact.Last_Name);
             String company = data.getStringExtra(CreateNewContact.Company);
             String phoneNumber = data.getStringExtra(CreateNewContact.PhoneNumber);
+            String email = data.getStringExtra(CreateNewContact.Email);
+            String address = data.getStringExtra(CreateNewContact.Address);
+            String notes = data.getStringExtra(CreateNewContact.Notes);
 
-            Contact contact = new Contact(0, firstName, lastName, company, phoneNumber);
+            Contact contact = new Contact(0, firstName, lastName, company, phoneNumber,
+                    email,address,notes);
             contactViewModel.addNewContact(contact);
 
 
